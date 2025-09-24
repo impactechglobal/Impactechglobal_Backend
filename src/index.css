@@ -1,96 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ImpactechGlobal Compliance Dashboard Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors - HSL format */
+    --primary-dark: 213 52% 12%;     /* #0F1C2F */
+    --secondary-dark: 216 34% 19%;   /* #1E2A47 */
+    --accent-orange: 14 100% 60%;    /* #FF6B35 */
+    --accent-yellow: 45 100% 70%;    /* #FFD166 */
+    
+    /* Extended Palette */
+    --background: 213 52% 8%;        /* Darker than primary-dark */
+    --foreground: 0 0% 98%;          /* Near white */
+    
+    --card: 213 52% 12%;             /* Same as primary-dark */
+    --card-foreground: 0 0% 95%;
+    
+    --popover: 216 34% 19%;          /* Same as secondary-dark */
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 14 100% 60%;          /* Accent orange */
+    --primary-foreground: 213 52% 8%;
+    
+    --secondary: 216 34% 25%;        /* Lighter than secondary-dark */
+    --secondary-foreground: 0 0% 90%;
+    
+    --muted: 216 34% 15%;            /* Darker than secondary-dark */
+    --muted-foreground: 0 0% 65%;
+    
+    --accent: 45 100% 70%;           /* Accent yellow */
+    --accent-foreground: 213 52% 12%;
+    
+    --destructive: 0 70% 55%;        /* Red for errors */
+    --destructive-foreground: 0 0% 98%;
+    
+    --success: 142 76% 36%;          /* Green for success */
+    --success-foreground: 0 0% 98%;
+    
+    --warning: 38 92% 50%;           /* Orange for warnings */
+    --warning-foreground: 213 52% 12%;
+    
+    --border: 216 34% 25%;           /* Subtle borders */
+    --input: 216 34% 19%;            /* Input backgrounds */
+    --ring: 14 100% 60%;             /* Focus ring - accent orange */
+    
+    --radius: 0.75rem;               /* Rounded corners */
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--accent-orange)), hsl(var(--accent-yellow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--secondary-dark)));
+    --gradient-glow: linear-gradient(135deg, hsl(var(--accent-orange) / 0.3), hsl(var(--accent-yellow) / 0.3));
+    
+    /* Shadows */
+    --shadow-glow: 0 0 30px hsl(var(--accent-orange) / 0.3);
+    --shadow-card: 0 8px 32px hsl(213 52% 4% / 0.3);
+    --shadow-elevated: 0 16px 64px hsl(213 52% 4% / 0.4);
+    
+    /* Glassmorphism */
+    --glass-bg: hsl(216 34% 19% / 0.8);
+    --glass-border: hsl(0 0% 100% / 0.1);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 213 52% 12%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 14 100% 60%;
+    --sidebar-primary-foreground: 213 52% 8%;
+    --sidebar-accent: 216 34% 19%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 216 34% 25%;
   }
 }
 
@@ -101,5 +87,47 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Cards */
+  .glass-card {
+    @apply backdrop-blur-sm border border-white/10 shadow-lg;
+    background: var(--glass-bg);
+  }
+  
+  /* Gradient Button Base */
+  .btn-gradient {
+    background: var(--gradient-primary);
+    @apply rounded-xl px-6 py-3 font-semibold text-background transition-all duration-300 ease-out hover:scale-105 shadow-lg;
+  }
+  
+  .btn-gradient:hover {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Status Indicators */
+  .status-critical {
+    @apply bg-destructive/20 text-destructive border border-destructive/30;
+  }
+  
+  .status-warning {
+    @apply bg-warning/20 text-warning border border-warning/30;
+  }
+  
+  .status-success {
+    @apply bg-success/20 text-success border border-success/30;
+  }
+  
+  /* Cyber glow effects */
+  .cyber-glow {
+    box-shadow: 0 0 20px hsl(var(--accent-orange) / 0.5);
+  }
+  
+  .neon-border {
+    border: 1px solid hsl(var(--accent-orange) / 0.6);
+    box-shadow: 0 0 10px hsl(var(--accent-orange) / 0.3);
   }
 }
