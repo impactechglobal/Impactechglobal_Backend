@@ -10,18 +10,44 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function Header() {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleSignOut = async () => {
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.error("Failed to log out");
+    }
+  };
+
+  const handleProfile = () => {
+    navigate("/profile");
+  };
+
+  const handleSettings = () => {
+    navigate("/settings");
+  };
   return (
-    <header className="h-16 border-b border-border bg-card flex items-center justify-between px-6">
-      {/* Search Section */}
-      <div className="flex items-center gap-4 flex-1 max-w-md">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-          <Input
-            placeholder="Search compliance data..."
-            className="pl-10 bg-input border-border"
-          />
+    <header className="sticky top-0 z-50 h-16 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60 flex items-center justify-between px-4 md:px-6">
+      {/* Mobile Sidebar Trigger */}
+      <div className="flex items-center gap-4">
+        <SidebarTrigger className="md:hidden" />
+        {/* Search Section */}
+        <div className="flex items-center gap-4 flex-1 max-w-md">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Input
+              placeholder="Search compliance data..."
+              className="pl-10 bg-input border-border"
+            />
+          </div>
         </div>
       </div>
 
@@ -89,16 +115,16 @@ export function Header() {
           <DropdownMenuContent align="end" className="w-56 glass-card">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleProfile}>
               <User className="mr-2 h-4 w-4" />
               Profile
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleSettings}>
               <Settings className="mr-2 h-4 w-4" />
               Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-destructive">
+            <DropdownMenuItem className="text-destructive" onClick={handleSignOut}>
               Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>
